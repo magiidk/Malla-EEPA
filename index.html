@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Malla Interactiva - EEPA</title>
+  <title>Malla Interactiva</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
- <section id="configuracion">
-  <h2>Personalizar colores</h2>
-  <label>Aprobadas: <input type="color" id="color-aprobada" /></label>
-  <label>Habilitadas: <input type="color" id="color-habilitada" /></label>
-  <label>Bloqueadas: <input type="color" id="color-bloqueada" /></label>
-</section> 
   <header>
-    <h1>Malla Interactiva - Estudios Políticos UCV</h1>
-    <button id="reset">Reiniciar progreso</button>
+    <h1>Malla de Materias</h1>
   </header>
-  <main id="grid"></main>
+
+  <section id="configuracion">
+    <h2>Personalizar colores</h2>
+    <label>Aprobadas: <input type="color" id="color-aprobada" /></label>
+    <label>Habilitadas: <input type="color" id="color-habilitada" /></label>
+    <label>Bloqueadas: <input type="color" id="color-bloqueada" /></label>
+  </section>
+
+  <main id="malla"></main>
+
   <script src="script.js"></script>
 </body>
 </html>
-
