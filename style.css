@@ -2,80 +2,62 @@
   --aprobada: #722F37;
   --habilitada: #851c34;
   --bloqueada: #47020a;
-  --text-light: #f4f4f4;
-  --radius: 12px;
-  --transition: 0.3s ease;
 }
 
 body {
+  font-family: sans-serif;
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #fdfdfd;
-  color: #333;
+  padding: 0;
+  background: #fff;
 }
 
 header {
-  padding: 1rem;
-  background: var(--habilitada);
+  background: #333;
   color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-h1 {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-button {
-  background: white;
-  color: var(--habilitada);
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-weight: bold;
-  transition: background var(--transition);
-}
-
-button:hover {
-  background: #eee;
-}
-
-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
   padding: 1rem;
+  text-align: center;
+}
+
+#malla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  padding: 2rem;
 }
 
 .materia {
   padding: 1rem;
-  border-radius: var(--radius);
-  color: var(--text-light);
-  transition: background var(--transition), transform var(--transition);
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  position: relative;
-}
-
-.materia:hover {
-  transform: scale(1.02);
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
 }
 
 .aprobada {
-  background: var(--aprobada);
-  text-decoration: line-through;
+  background-color: var(--aprobada);
 }
 
 .habilitada {
-  background: var(--habilitada);
+  background-color: var(--habilitada);
 }
 
 .bloqueada {
-  background: var(--bloqueada);
-  opacity: 0.6;
-  cursor: not-allowed;
+  background-color: var(--bloqueada);
+}
+
+#configuracion {
+  padding: 1rem;
+  background: #f0f0f0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+#configuracion label {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
