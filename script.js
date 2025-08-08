@@ -1,12 +1,28 @@
-let materias = [];
-let progreso = JSON.parse(localStorage.getItem("progreso")) || {};
+const materias = [
+  { codigo: "0529", nombre: "Introducción a la Economía", semestre: 1, correlativas: [] },
+  { codigo: "0535", nombre: "Introducción al Derecho", semestre: 1, correlativas: [] },
+  { codigo: "1547", nombre: "Técnicas de Estudio I", semestre: 1, correlativas: [] },
+  { codigo: "1548", nombre: "Introducción a las Ciencias Sociales", semestre: 1, correlativas: [] },
+  { codigo: "0528", nombre: "Introducción a la Teoría General de la Administración", semestre: 2, correlativas: ["1548"] },
+  { codigo: "0534", nombre: "Introducción a la Política", semestre: 2, correlativas: ["1548"] },
+  { codigo: "1552", nombre: "Introducción al Estudio del Estado", semestre: 2, correlativas: ["0535"] },
+  { codigo: "1553", nombre: "Técnica de Estudio II", semestre: 2, correlativas: ["1547"] },
+  { codigo: "1554", nombre: "Introducción a las Estructuras Históricas II", semestre: 2, correlativas: ["1549"] },
+  { codigo: "2647", nombre: "Economía I", semestre: 2, correlativas: ["0529"] },
+  { codigo: "1546", nombre: "Estadística", semestre: 3, correlativas: ["1553"] },
+  { codigo: "1557", nombre: "Historia de las Formas Políticas Modernas", semestre: 3, correlativas: ["1549", "1552"] },
+  { codigo: "2644", nombre: "Teoría Política I", semestre: 3, correlativas: ["0534"] },
+  { codigo: "2645", nombre: "Teoría General de la Organización I", semestre: 3, correlativas: ["0528"] },
+  { codigo: "2648", nombre: "Sociología", semestre: 3, correlativas: ["1548"] },
+  { codigo: "0555", nombre: "Metodología de la Investigación Empírica", semestre: 4, correlativas: ["2648", "0534", "1546"] },
+  { codigo: "1558", nombre: "Economía II", semestre: 4, correlativas: ["2647"] },
+  { codigo: "1563", nombre: "Historia de las Ideas Políticas Modernas", semestre: 4, correlativas: ["1557"] },
+  { codigo: "2642", nombre: "Teoría General de la Organización II", semestre: 4, correlativas: ["2645"] },
+  { codigo: "2646", nombre: "Teoría Política II", semestre: 4, correlativas: ["1554", "2644"] },
+  // ... continúa con el resto de las materias hasta el décimo semestre
+];
 
-async function cargarMaterias() {
-  const res = await fetch("materias.json");
-  materias = await res.json();
-  aplicarColores();
-  renderMaterias();
-}
+let progreso = JSON.parse(localStorage.getItem("progreso")) || {};
 
 function renderMaterias() {
   const malla = document.getElementById("malla");
@@ -88,4 +104,5 @@ function aplicarColores() {
   });
 });
 
-cargarMaterias();
+aplicarColores();
+renderMaterias();
