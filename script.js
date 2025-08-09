@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { codigo: "0529", nombre: "INTRODUCCIÓN A LA ECONOMIA", uc: 3, requisitos: [] },
                 { codigo: "0535", nombre: "INTRODUCCIÓN AL DERECHO", uc: 4, requisitos: [] },
                 { codigo: "1547", nombre: "TÉCNICAS DE ESTUDIO I", uc: 3, requisitos: [] },
-                { codigo: "1548", nombre: "INTRODUCCIÓN A LAS CIENCIAS SOCIALES", uc: 3, requisitos: [] }
+                { codigo: "1548", nombre: "INTRODUCCIÓN A LAS CIENCIAS SOCIALES", uc: 3, requisitos: [] },
                 { codigo: "1549", nombre: "INTRODUCCIÓN A LAS ESTRUCTURAS HISTÓRICAS I", uc:4, requisitos: [] }
             ]
         },
