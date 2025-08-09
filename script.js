@@ -1,139 +1,198 @@
-const materias = [
-  { "codigo": "0529", "nombre": "Introducción a la Economía", "semestre": 1, "correlativas": [] },
-  { "codigo": "0535", "nombre": "Introducción al Derecho", "semestre": 1, "correlativas": [] },
-  { "codigo": "1547", "nombre": "Técnicas de Estudio I", "semestre": 1, "correlativas": [] },
-  { "codigo": "1548", "nombre": "Introducción a las Ciencias Sociales", "semestre": 1, "correlativas": [] },
-  { "codigo": "0528", "nombre": "Introducción a la Teoría General de la Administración", "semestre": 2, "correlativas": ["1548"] },
-  { "codigo": "0534", "nombre": "Introducción a la Política", "semestre": 2, "correlativas": ["1548"] },
-  { "codigo": "1552", "nombre": "Introducción al Estudio del Estado", "semestre": 2, "correlativas": ["0535"] },
-  { "codigo": "1553", "nombre": "Técnica de Estudio II", "semestre": 2, "correlativas": ["1547"] },
-  { "codigo": "1554", "nombre": "Introducción a las Estructuras Históricas II", "semestre": 2, "correlativas": ["1549"] },
-  { "codigo": "2647", "nombre": "Economía I", "semestre": 2, "correlativas": ["0529"] },
-  { "codigo": "1546", "nombre": "Estadística", "semestre": 3, "correlativas": ["1553"] },
-  { "codigo": "1557", "nombre": "Historia de las Formas Políticas Modernas", "semestre": 3, "correlativas": ["1549", "1552"] },
-  { "codigo": "2644", "nombre": "Teoría Política I", "semestre": 3, "correlativas": ["0534"] },
-  { "codigo": "2645", "nombre": "Teoría General de la Organización I", "semestre": 3, "correlativas": ["0528"] },
-  { "codigo": "2648", "nombre": "Sociología", "semestre": 3, "correlativas": ["1548"] },
-  { "codigo": "0555", "nombre": "Metodología de la Investigación Empírica", "semestre": 4, "correlativas": ["2648", "0534", "1546"] },
-  { "codigo": "1558", "nombre": "Economía II", "semestre": 4, "correlativas": ["2647"] },
-  { "codigo": "1563", "nombre": "Historia de las Ideas Políticas Modernas", "semestre": 4, "correlativas": ["1557"] },
-  { "codigo": "2642", "nombre": "Teoría General de la Organización II", "semestre": 4, "correlativas": ["2645"] },
-  { "codigo": "2646", "nombre": "Teoría Política II", "semestre": 4, "correlativas": ["1554", "2644"] },
-  { "codigo": "0551", "nombre": "Estructuras Políticas-Constitucionales Comparadas", "semestre": 5, "correlativas": ["1557", "2644"] },
-  { "codigo": "1565", "nombre": "Sociología II", "semestre": 5, "correlativas": ["2648"] },
-  { "codigo": "2626", "nombre": "Teoría Política III", "semestre": 5, "correlativas": ["2646"] },
-  { "codigo": "2629", "nombre": "Estadística Superior", "semestre": 5, "correlativas": ["0555"] },
-  { "codigo": "2973", "nombre": "Estructuras Internacionales I", "semestre": 5, "correlativas": ["0534", "1563"] },
-  { "codigo": "0552", "nombre": "Fundamentos de Administración Pública", "semestre": 6, "correlativas": ["1552"] },
-  { "codigo": "0554", "nombre": "Historia de las Ideas y Movimientos Sociales Contemporáneos", "semestre": 6, "correlativas": ["1563", "1554"] },
-  { "codigo": "1568", "nombre": "Sistema Político Venezolano", "semestre": 6, "correlativas": ["1554", "0551", "2626"] },
-  { "codigo": "2581", "nombre": "Matemática Aplicada a la Ciencia Política", "semestre": 6, "correlativas": ["2629"] },
-  { "codigo": "2974", "nombre": "Estructuras Internacionales III", "semestre": 6, "correlativas": ["2973"] },
-  { "codigo": "2576", "nombre": "Estructuras Políticas-Constitucionales de América Latina (POL)", "semestre": 7, "correlativas": ["0551"] },
-  { "codigo": "2578", "nombre": "Sistemas Económicos Comparados (POL)", "semestre": 7, "correlativas": ["1558"] },
-  { "codigo": "2579", "nombre": "Filosofía Política (POL)", "semestre": 7, "correlativas": ["0554"] },
-  { "codigo": "0573", "nombre": "Derecho Administrativo (APU)", "semestre": 7, "correlativas": ["0552"] },
-  { "codigo": "0574", "nombre": "Finanzas Públicas I (APU)", "semestre": 7, "correlativas": ["1558"] },
-  { "codigo": "0587", "nombre": "Derecho Internacional Público I (RIN)", "semestre": 7, "correlativas": ["2974"] },
-  { "codigo": "0588", "nombre": "Teoría de las Relaciones Internacionales (RIN)", "semestre": 7, "correlativas": ["2974"] },
-  { "codigo": "2975", "nombre": "Historia de las Relaciones Internacionales I (RIN)", "semestre": 7, "correlativas": ["2974"] },
-  { "codigo": "2627", "nombre": "Lectura de un Clásico Político (POL)", "semestre": 8, "correlativas": ["2579"] },
-  { "codigo": "2631", "nombre": "Finanzas Públicas II (APU)", "semestre": 8, "correlativas": ["0574"] },
-  { "codigo": "2976", "nombre": "Derecho Internacional Público II (RIN)", "semestre": 8, "correlativas": ["2975"] },
-  { "codigo": "2978", "nombre": "Teoría de las Relaciones Internacionales II (RIN)", "semestre": 8, "correlativas": ["1568", "2975"] },
-  { "codigo": "2977", "nombre": "Historia Diplomática de Venezuela (RIN)", "semestre": 8, "correlativas": ["2974"] },
-  { "codigo": "0579", "nombre": "Derecho Constitucional Venezolano (POL)", "semestre": 9, "correlativas": ["1668"] },
-  { "codigo": "2635", "nombre": "Teoría del Estado (POL)", "semestre": 9, "correlativas": ["2576"] },
-  { "codigo": "0608", "nombre": "Organización Administrativa Venezolana (APU)", "semestre": 9, "correlativas": ["0573"] },
-  { "codigo": "2634", "nombre": "Procedimientos Administrativos (APU)", "semestre": 9, "correlativas": ["0573"] },
-  { "codigo": "2977", "nombre": "Historia de las Relaciones Internacionales III (RIN)", "semestre": 9, "correlativas": ["2976"] },
-  { "codigo": "2980", "nombre": "Organizaciones Internacionales (RIN)", "semestre": 9, "correlativas": ["1558", "2974"] },
-  { "codigo": "2982", "nombre": "Relaciones Económicas Internacionales I (RIN)", "semestre": 9, "correlativas": ["0597"] },
-  { "codigo": "1567", "nombre": "Psicología Social (POL - APU - RIN)", "semestre": 10, "correlativas": ["1565"] },
+document.addEventListener('DOMContentLoaded', () => {
+    const semesters = [
+        {
+            name: "Primer Semestre",
+            subjects: [
+                { code: "0529", name: "INTRODUCCIÓN A LA ECONOMIA", uc: 3, requisites: [] },
+                { code: "0535", name: "INTRODUCCION AL DERECHO", uc: 4, requisites: [] },
+                { code: "1547", name: "TECNICAS DE ESTUDIO I", uc: 3, requisites: [] },
+                { code: "1548", name: "INTRODUCCION A LAS CIENCIAS SOCIALES", uc: 3, requisites: [] },
+            ]
+        },
+        {
+            name: "Segundo Semestre",
+            subjects: [
+                { code: "0528", name: "INTRODUCCIÓN A LA TEORIA GENERAL DE LA ADMINISTRACIÓN", uc: 3, requisites: ["1548"] },
+                { code: "0534", name: "INTRODUCCION A LA POLITICA", uc: 3, requisites: ["1548"] },
+                { code: "1552", name: "INTRODUCCIÓN AL ESTUDIO DEL ESTADO", uc: 4, requisites: ["0535"] },
+                { code: "1553", name: "TECNICA DE ESTUDIO II", uc: 3, requisites: ["1547"] },
+                { code: "1554", name: "INTRODUCCIÓN A LAS ESTRUCTURAS HISTÓRICAS II", uc: 4, requisites: ["1549"] },
+                { code: "2647", name: "ECONOMIA I", uc: 3, requisites: ["0529"] },
+            ]
+        },
+        {
+            name: "Tercer Semestre",
+            subjects: [
+                { code: "1546", name: "ESTADISTICA", uc: 3, requisites: ["1553"] },
+                { code: "1557", name: "HISTORIA DE LAS FORMAS POLITICAS MODERNAS", uc: 5, requisites: ["1549", "1552"] },
+                { code: "2644", name: "TEORIA POLITICA I", uc: 6, requisites: ["0534"] },
+                { code: "2645", name: "TEORIA GENERAL DE LA ORGANIZACIÓN I", uc: 3, requisites: ["0528"] },
+                { code: "2648", name: "SOCIOLOGIA", uc: 3, requisites: ["1548"] },
+            ]
+        },
+        {
+            name: "Cuarto Semestre",
+            subjects: [
+                { code: "0555", name: "METODOLOGIA DE LA INVESTIGACION EMPIRICA", uc: 3, requisites: ["2648", "0534", "1546"] },
+                { code: "1558", name: "ECONOMIA II", uc: 3, requisites: ["2647"] },
+                { code: "1563", name: "HISTORIA DE LAS IDEAS POLITICAS MODERNAS", uc: 5, requisites: ["1557"] },
+                { code: "2642", name: "TEORIA GENERAL DE LA ORGANIZACIÓN II", uc: 3, requisites: ["2645"] },
+                { code: "2646", name: "TEORIA POLITICA II", uc: 4, requisites: ["1554", "2644"] },
+            ]
+        },
+        {
+            name: "Quinto Semestre",
+            subjects: [
+                { code: "0551", name: "ESTRUCTURAS POLITICAS-CONSTITUCIONALES COMPARADAS", uc: 3, requisites: ["1557", "2644"] },
+                { code: "1565", name: "SOCIOLOGIA II", uc: 3, requisites: ["2648"] },
+                { code: "2626", name: "TEORIA POLITICA III", uc: 4, requisites: ["2646"] },
+                { code: "2629", name: "ESTADISTICA SUPERIOR", uc: 3, requisites: ["0555"] },
+                { code: "2973", name: "ESTRUCTURAS INTERNACIONALES I", uc: 4, requisites: ["0534", "1563"] },
+                { code: "MONO", name: "CURSO MONOGRÀFICO", uc: 3, requisites: [] },
+            ]
+        },
+        {
+            name: "Sexto Semestre",
+            subjects: [
+                { code: "0552", name: "FUNDAMENTOS DE ADMINISTRACIÓN PÚBLICA", uc: 3, requisites: ["1552"] },
+                { code: "0554", name: "HISTORIA DE LAS IDEAS Y MOVIMIENTOS SOCIALES CONTEMPORANEOS", uc: 3, requisites: ["1563", "1554"] },
+                { code: "1568", name: "SISTEMA POLITICO VENEZOLANO", uc: 3, requisites: ["1554", "0551", "2626"] },
+                { code: "2581", name: "MATEMATICA APLICADA A LA CIENCIA POLITICA", uc: 3, requisites: ["2629"] },
+                { code: "2974", name: "ESTRUCTURAS INTERNACIONALES III", uc: 4, requisites: ["2973"] },
+                { code: "SEMI", name: "SEMINARIOS", uc: 3, requisites: [] },
+            ]
+        },
+        {
+            name: "Séptimo Semestre",
+            subjects: [
+                { code: "2576", name: "ESTRUCTURAS POLITICAS- CONSTITUCIONALES DE AMERICA LATINA (POL)", uc: 6, requisites: ["0551"] },
+                { code: "2578", name: "SISTEMAS ECONÒMICOS COMPARADOS (POL)", uc: 3, requisites: ["1558"] },
+                { code: "2579", name: "FILOSOFIA POLITICA (POL)", uc: 3, requisites: ["0554"] },
+                { code: "0573", name: "DERECHO ADMINISTRATIVO (APU)", uc: 6, requisites: ["0552"] },
+                { code: "0574", name: "FINANZAS PÚBLICAS I (APU)", uc: 3, requisites: ["1558"] },
+                { code: "0587", name: "DERECHO INTERNACIONAL PÚBLICO I (RIN)", uc: 4, requisites: ["2974"] },
+                { code: "0588", name: "TEORIA DE LAS RELACIONES INTERNACIONALES (RIN)", uc: 4, requisites: ["2974"] },
+                { code: "2975", name: "HISTORIA DE LAS RELACIONES INTERNACIONALES I (RIN)", uc: 4, requisites: ["2974"] },
+            ]
+        },
+        {
+            name: "Octavo Semestre",
+            subjects: [
+                { code: "2627", name: "LECTURA DE UN CLASICO POLITICO (POL)", uc: 3, requisites: ["2579"] },
+                { code: "2631", name: "FINANZAS PUBLICAS II (APU)", uc: 6, requisites: ["0574"] },
+                { code: "2976", name: "DERECHO INTERNACIONAL PÚBLICO II (RIN)", uc: 3, requisites: ["2975"] },
+                { code: "2978", name: "TEORIA DE LAS RELACIONES INTERNACIONALES II (RIN)", uc: 3, requisites: ["1568"] },
+                { code: "2975", name: "HISTORIA DIPLOMATICA DE VENEZUELA (RIN)", uc: 3, requisites: ["2974"] },
+            ]
+        },
+        {
+            name: "Noveno Semestre",
+            subjects: [
+                { code: "0579", name: "DERECHO CONSTITUCIONAL VENEZOLANO (POL)", uc: 6, requisites: ["1668"] },
+                { code: "2635", name: "TEORIA DEL ESTADO (POL)", uc: 3, requisites: ["2576"] },
+                { code: "0608", name: "ORGANIZACIÓN ADMINISTRATIVA VENEZOLANA (APU)", uc: 5, requisites: ["0573"] },
+                { code: "2634", name: "PROCEDIMIENTOS ADMINISTRATIVOS (APU)", uc: 4, requisites: ["0573"] },
+                { code: "2977", name: "HISTORIA DE LAS RELACIONES INTERNACIONALES III (RIN)", uc: 5, requisites: ["2976"] },
+                { code: "2980", name: "RELACIONES ECONÓMICAS INTERNACIONALES I (RIN)", uc: 3, requisites: ["1558", "2974"] },
+                { code: "2982", name: "ORGANIZACIONES INTERNACIONALES (RIN)", uc: 4, requisites: ["0597"] },
+            ]
+        },
+        {
+            name: "Décimo Semestre",
+            subjects: [
+                { code: "1567", name: "PSICOLOGIA SOCIAL (POL - APU-RIN)", uc: 3, requisites: ["1565"] },
+                { code: "2583", name: "ECONOMIA III (POL - APU)", uc: 3, requisites: ["1568"] },
+                { code: "0598", name: "GEOGRAFIA POLITICA ECONÒMICA (RIN)", uc: 3, requisites: ["1558"] },
+                { code: "2979", name: "HISTORIA DIPLOMATICA DE VENEZUELA II (RIN)", uc: 3, requisites: ["2978"] },
+                { code: "2981", name: "RELACIONES ECONÓMICAS INTERNACIONALES II (RIN)", uc: 3, requisites: ["2980"] },
+            ]
+        },
+        // Los cursos monográficos y seminarios se pueden gestionar de manera separada o con una lógica similar.
+    ];
 
-];
+    const meshContainer = document.getElementById('mesh-container');
+    const resetButton = document.getElementById('reset-button');
+    let passedSubjects = new Set();
+    const storageKey = 'passedSubjects_UCV_EEYA';
 
-let progreso = JSON.parse(localStorage.getItem("progreso")) || {};
+    function loadProgress() {
+        const storedProgress = localStorage.getItem(storageKey);
+        if (storedProgress) {
+            passedSubjects = new Set(JSON.parse(storedProgress));
+        }
+    }
 
-function renderMaterias() {
-  const malla = document.getElementById("malla");
-  malla.innerHTML = "";
+    function saveProgress() {
+        localStorage.setItem(storageKey, JSON.stringify(Array.from(passedSubjects)));
+    }
 
-  const materiasPorSemestre = {};
-  materias.forEach(m => {
-    if (!materiasPorSemestre[m.semestre]) materiasPorSemestre[m.semestre] = [];
-    materiasPorSemestre[m.semestre].push(m);
-  });
+    function canUnlock(subject) {
+        if (subject.requisites.length === 0) {
+            return true;
+        }
+        return subject.requisites.every(reqCode => passedSubjects.has(reqCode));
+    }
 
-  Object.keys(materiasPorSemestre).sort((a, b) => a - b).forEach(semestre => {
-    const columna = document.createElement("div");
-    columna.className = "semestre";
-    const titulo = document.createElement("h3");
-    titulo.textContent = `Semestre ${semestre}`;
-    columna.appendChild(titulo);
+    function renderMesh() {
+        meshContainer.innerHTML = '';
+        semesters.forEach(semester => {
+            const semesterDiv = document.createElement('div');
+            semesterDiv.className = 'semester';
+            semesterDiv.innerHTML = `<h3>${semester.name}</h3>`;
+            const subjectsDiv = document.createElement('div');
+            subjectsDiv.className = 'subjects';
+            
+            semester.subjects.forEach(subject => {
+                const subjectCard = document.createElement('div');
+                subjectCard.className = 'subject-card';
+                subjectCard.dataset.code = subject.code;
+                
+                const isPassed = passedSubjects.has(subject.code);
+                const isUnlocked = canUnlock(subject);
 
-    materiasPorSemestre[semestre].forEach(materia => {
-      const div = document.createElement("div");
-      div.classList.add("materia");
+                if (isPassed) {
+                    subjectCard.classList.add('passed');
+                } else if (isUnlocked) {
+                    subjectCard.classList.add('unlocked');
+                } else {
+                    subjectCard.classList.add('blocked');
+                }
 
-      const estado = getEstado(materia);
-      div.classList.add(estado);
-      div.textContent = materia.nombre;
-      div.dataset.codigo = materia.codigo;
+                subjectCard.innerHTML = `
+                    <div class="subject-code">${subject.code}</div>
+                    <div class="subject-name">${subject.name}</div>
+                    <div class="subject-uc">U/C: ${subject.uc}</div>
+                `;
 
-      if (estado === "habilitada") {
-        div.addEventListener("click", () => marcarAprobada(materia.codigo));
-      }
+                if (subject.requisites.length > 0) {
+                    subjectCard.innerHTML += `<div class="subject-requisites">Req: ${subject.requisites.join(', ')}</div>`;
+                }
 
-      columna.appendChild(div);
+                subjectCard.addEventListener('click', () => {
+                    if (subjectCard.classList.contains('unlocked')) {
+                        passedSubjects.add(subject.code);
+                        saveProgress();
+                        renderMesh();
+                    }
+                });
+
+                subjectsDiv.appendChild(subjectCard);
+            });
+            
+            semesterDiv.appendChild(subjectsDiv);
+            meshContainer.appendChild(semesterDiv);
+        });
+    }
+
+    resetButton.addEventListener('click', () => {
+        if (confirm('¿Estás seguro de que quieres reiniciar todo el progreso?')) {
+            passedSubjects.clear();
+            saveProgress();
+            renderMesh();
+        }
     });
 
-    malla.appendChild(columna);
-  });
-}
-
-function getEstado(materia) {
-  if (progreso[materia.codigo]) return "aprobada";
-  if (materia.correlativas.every(c => progreso[c])) return "habilitada";
-  return "bloqueada";
-}
-
-function marcarAprobada(codigo) {
-  progreso[codigo] = true;
-  guardarProgreso();
-  renderMaterias();
-}
-
-function guardarProgreso() {
-  localStorage.setItem("progreso", JSON.stringify(progreso));
-}
-
-document.getElementById("reset")?.addEventListener("click", () => {
-  if (confirm("¿Seguro que quieres reiniciar tu progreso?")) {
-    progreso = {};
-    guardarProgreso();
-    renderMaterias();
-  }
+    // Cargar y renderizar al inicio
+    loadProgress();
+    renderMesh();
 });
-
-function aplicarColores() {
-  const root = document.documentElement;
-  root.style.setProperty("--aprobada", localStorage.getItem("color-aprobada") || "#722F37");
-  root.style.setProperty("--habilitada", localStorage.getItem("color-habilitada") || "#851c34");
-  root.style.setProperty("--bloqueada", localStorage.getItem("color-bloqueada") || "#47020a");
-
-  document.getElementById("color-aprobada").value = localStorage.getItem("color-aprobada") || "#722F37";
-  document.getElementById("color-habilitada").value = localStorage.getItem("color-habilitada") || "#851c34";
-  document.getElementById("color-bloqueada").value = localStorage.getItem("color-bloqueada") || "#47020a";
-}
-
-["color-aprobada", "color-habilitada", "color-bloqueada"].forEach(id => {
-  document.getElementById(id)?.addEventListener("input", e => {
-    localStorage.setItem(id, e.target.value);
-    aplicarColores();
-    renderMaterias();
-  });
-});
-
-aplicarColores();
-renderMaterias();
